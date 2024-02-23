@@ -37,12 +37,12 @@ export const convertUnits = <
 
   const converters = converterMap[fromUnitSuffix];
   if (converters === undefined) {
-    throw new TypeError('Invalid value for fromUnitValue argument.');
+    throw new TypeError(`Invalid value ${fromUnitSuffix} for fromUnitValue argument.`);
   }
 
   const converter = converters[toUnitSuffix];
   if (converter === undefined) {
-    throw new TypeError('Invalid value for toUnitSuffix argument');
+    throw new TypeError(`Invalid value ${toUnitSuffix} for toUnitSuffix argument, only [${Object.keys(converters).join(",")}] supported for input suffix ${fromUnitSuffix}`);
   }
 
   const toUnitValue = converter(fromValue, {
@@ -69,3 +69,12 @@ export const convertUnits = <
   });
   return `${toUnitValue}${toUnitSuffix}` as unknown as Unit<ToUnitSuffix>;
 };
+
+
+export function isUnitValue(value: string): value is Unit<UnitSuffix> {
+  const split = value.match(UNIT_SPLIT_REGEXP)
+  if (split === null || split.length < 3) {
+    return false
+  }
+  return true;
+}
