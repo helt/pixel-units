@@ -1,7 +1,8 @@
 import { UnitSuffix } from '@src/defs';
 import { PICA_PIXEL_VALUE } from '@src/internal/constants';
-import { UnitConverterOptions, noConvert } from '@src/internal/converters';
+import { UnitConverterOptions } from '@src/internal/converters';
 import { pixel } from '@src/internal/converters/pixel';
+import { noConvert } from '@src/internal'
 
 const picaToPixel = (value: number): number => {
   return value * PICA_PIXEL_VALUE;

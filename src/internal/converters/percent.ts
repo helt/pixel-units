@@ -1,5 +1,6 @@
 import { UnitSuffix } from '@src/defs';
-import { noConvert } from '@src/internal/converters';
+
+import { noConvert } from '@src/internal'
 
 const percentToMagnification = (value: number): number => {
   return value / 100;

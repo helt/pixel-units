@@ -7,7 +7,8 @@ import {
   POINT_PIXEL_VALUE,
   QUARTER_PIXEL_VALUE
 } from '@src/internal/constants';
-import { UnitConverterOptions, noConvert } from '@src/internal/converters';
+import { UnitConverterOptions } from '@src/internal/converters';
+import { noConvert } from '@src/internal'
 
 const pixelToCentimeter = (value: number): number => {
   return value / CENTIMETER_PIXEL_VALUE;

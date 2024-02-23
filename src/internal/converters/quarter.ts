@@ -1,7 +1,8 @@
 import { UnitSuffix } from '@src/defs';
 import { QUARTER_PIXEL_VALUE } from '@src/internal/constants';
-import { UnitConverterOptions, noConvert } from '@src/internal/converters';
+import { UnitConverterOptions } from '@src/internal/converters';
 import { pixel } from '@src/internal/converters/pixel';
+import { noConvert } from '@src/internal'
 
 const quarterToPixel = (value: number): number => {
   return value * QUARTER_PIXEL_VALUE;

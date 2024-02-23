@@ -1,9 +1,10 @@
 import { UnitSuffix } from '@src/defs';
-import { UnitConverterOptions, noConvert } from '@src/internal/converters';
+import { UnitConverterOptions } from '@src/internal/converters';
 import { pixel } from '@src/internal/converters/pixel';
+import { noConvert } from '@src/internal'
 
 const viewWidthToPixel = (value: number, options: UnitConverterOptions): number => {
-  return value * options.viewWidthPixelValue();
+  return value/100 * options.viewWidthPixelValue();
 };
 
 const viewWidthToCentimeter = (value: number, options: UnitConverterOptions): number => {
