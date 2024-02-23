@@ -70,11 +70,61 @@ export const convertUnits = <
   return `${toUnitValue}${toUnitSuffix}` as unknown as Unit<ToUnitSuffix>;
 };
 
-
+/**
+ * Type guard to narrow down a string value to a `Unit<UnitSuffix>`
+ * @param value
+ */
 export function isUnitValue(value: string): value is Unit<UnitSuffix> {
   const split = value.match(UNIT_SPLIT_REGEXP)
   if (split === null || split.length < 3) {
     return false
   }
   return true;
+}
+
+
+/**
+ * takes a string and tries to infer the actual pixel value on the screen.
+ * @param cssLength
+ * @param elem
+ * @param dir
+ * @throws TypeError if cssLength is not a valid
+ */
+export function normalizeToPixel(cssLength: string, elem?: HTMLElement, dir: 'w' | 'h' = 'w') {
+  if(!isUnitValue(cssLength)) {
+    return Number.NaN;
+  }
+
+  const maxHeightSPlit = splitUnitValue(cssLength)
+
+  switch (maxHeightSPlit.unitSuffix) {
+    case '':
+    case 'px':
+      return maxHeightSPlit.value
+    case '%':
+      if (!elem) {
+        return 0
+      }
+      if (dir === 'w') {
+        return (maxHeightSPlit.value * (elem.parentElement?.clientHeight ?? 0)) / 100
+      } else {
+        return (maxHeightSPlit.value * (elem.parentElement?.clientHeight ?? 0)) / 100
+      }
+    case 'pt':
+    case 'cm':
+    case 'em':
+    case 'in':
+    case 'mm':
+    case 'pc':
+    case 'Q':
+    case 'rem':
+    case 'vh':
+    case 'vmax':
+    case 'vmin':
+    case 'vw':
+      const pxValue = convertUnits(cssLength, 'px')
+      const split = splitUnitValue(pxValue)
+      return split.value
+  }
+
 }
