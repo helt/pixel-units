@@ -244,3 +244,7 @@ Temporary Items
 
 ### Output
 dist/
+
+
+# intellij crap
+*.iml
